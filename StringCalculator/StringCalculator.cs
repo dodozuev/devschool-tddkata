@@ -11,6 +11,7 @@ public static class StringCalculator
 
         return numbers.Split(",")
             .Select(x => x.Trim())
+            .Where(x => !string.IsNullOrEmpty(x))
             .Select(int.Parse)
             .Sum();
     }
