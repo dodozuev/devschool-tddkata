@@ -34,4 +34,16 @@ public class TennisGameTests
 
         player.Points.Should().Be(30);
     }
+
+    [Test]
+    public void WhenPlayerScoresThirdTime_ScoreIs40()
+    {
+        var player = new Player();
+
+        player.Score();
+        player.Score();
+        player.Score();
+
+        player.Points.Should().Be(40);
+    }
 }
