@@ -2,6 +2,6 @@
 
 public class TennisGame
 {
-    public int Player1Points = 0;
-    public int Player2Points = 0;
+    public Player Player1 = new Player();
+    public Player Player2 = new Player();
 }

@@ -10,7 +10,7 @@ public class TennisGameTests
     {
         var sut = new TennisGame();
 
-        sut.Player1Points.Should().Be(0);
-        sut.Player2Points.Should().Be(0);
+        sut.Player1.Points.Should().Be(0);
+        sut.Player2.Points.Should().Be(0);
     }
 }
