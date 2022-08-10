@@ -2,12 +2,16 @@
 
 public class TennisGame
 {
-    public Player Player1 = new Player();
-    public Player Player2 = new Player();
+    public readonly Player Player1 = new Player();
+    public readonly Player Player2 = new Player();
     public Player? Winner = null;
     public void ScorePlayer(Player player)
     {
-        player.Score();
+        if (player.Points < 30)
+            player.Points += 15;
+        else
+            player.Points += 10;
+
         Winner ??= GetWinner();
     }
 

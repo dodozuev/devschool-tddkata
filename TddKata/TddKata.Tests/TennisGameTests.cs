@@ -17,44 +17,44 @@ public class TennisGameTests
     [Test]
     public void WhenPlayerScores_Adds15Points()
     {
-        var player = new Player();
+        var game = new TennisGame();
 
-        player.Score();
-
-        player.Points.Should().Be(15);
+        game.ScorePlayer(game.Player1);
+        game.Player1.Points.Should().Be(15);
     }
 
     [Test]
     public void WhenPlayerScoresTwice_Adds30Points()
     {
-        var player = new Player();
+        var game = new TennisGame();
 
-        player.Score();
-        player.Score();
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player1);
 
-        player.Points.Should().Be(30);
+        game.Player1.Points.Should().Be(30);
     }
 
     [Test]
     public void WhenPlayerScoresThirdTime_ScoreIs40()
     {
-        var player = new Player();
+        var game = new TennisGame();
 
-        player.Score();
-        player.Score();
-        player.Score();
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player1);
 
-        player.Points.Should().Be(40);
+        game.Player1.Points.Should().Be(40);
     }
 
     [Test]
     public void WhenPlayer1ScoresFourTimesFromBeginning_HeWins()
     {
         var game = new TennisGame();
-        game.Player1.Score();
-        game.Player1.Score();
-        game.Player1.Score();
-        game.Player1.Score();
+
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player1);
 
         game.Winner.Should().Be(game.Player1);
     }
@@ -63,10 +63,11 @@ public class TennisGameTests
     public void WhenPlayer2ScoresFourTimesFromBeginning_HeWins()
     {
         var game = new TennisGame();
-        game.Player2.Score();
-        game.Player2.Score();
-        game.Player2.Score();
-        game.Player2.Score();
+
+        game.ScorePlayer(game.Player2);
+        game.ScorePlayer(game.Player2);
+        game.ScorePlayer(game.Player2);
+        game.ScorePlayer(game.Player2);
 
         game.Winner.Should().Be(game.Player2);
     }
@@ -84,29 +85,30 @@ public class TennisGameTests
     public void WhenDeuce_ShouldNotReturnWinner()
     {
         var game = new TennisGame();
-        game.Player2.Score();
-        game.Player2.Score();
-        game.Player2.Score();
-        game.Player2.Score();
-        game.Player1.Score();
-        game.Player1.Score();
-        game.Player1.Score();
+        game.ScorePlayer(game.Player2);
+        game.ScorePlayer(game.Player2);
+        game.ScorePlayer(game.Player2);
+
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player1);
 
         game.Winner.Should().Be(null);
     }
 
     [Test]
-    public void WhenDeuce_AndOneOfPlayersGetsTwoPoints_ShouldReturnWinner()
+    public void WhenDeuce_AndOneOfPlayersScores_ShouldReturnWinner()
     {
         var game = new TennisGame();
-        game.Player2.Score();
-        game.Player2.Score();
-        game.Player2.Score();
-        game.Player2.Score();
-        game.Player1.Score();
-        game.Player1.Score();
-        game.Player1.Score();
-        game.Player2.Score();
+        game.ScorePlayer(game.Player2);
+        game.ScorePlayer(game.Player2);
+        game.ScorePlayer(game.Player2);
+
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player2);
+        game.ScorePlayer(game.Player2);
 
         game.Winner.Should().Be(game.Player2);
     }
@@ -115,13 +117,15 @@ public class TennisGameTests
     public void WhenAPlayerWins_ResultIsSaved()
     {
         var game = new TennisGame();
-        game.Player2.Score();
-        game.Player2.Score();
-        game.Player2.Score();
-        game.Player2.Score();
-        game.Player1.Score();
-        game.Player1.Score();
-        game.Player1.Score();
+
+        game.ScorePlayer(game.Player2);
+        game.ScorePlayer(game.Player2);
+        game.ScorePlayer(game.Player2);
+        game.ScorePlayer(game.Player2);
+
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player1);
+        game.ScorePlayer(game.Player1);
 
         game.Winner.Should().Be(game.Player2);
     }
