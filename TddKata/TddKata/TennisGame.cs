@@ -15,7 +15,7 @@ public class TennisGame
         var winnerCandidate = players.OrderBy(p => p.Points).Last();
         var secondPlace = players.Except(new[] {winnerCandidate}).First();
 
-        if (winnerCandidate.Points - secondPlace.Points > 30)
+        if (winnerCandidate.Points - secondPlace.Points >= 20)
         {
             return winnerCandidate;
         }
