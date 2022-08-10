@@ -23,4 +23,15 @@ public class TennisGameTests
 
         player.Points.Should().Be(15);
     }
+
+    [Test]
+    public void WhenPlayerScoresTwice_Adds30Points()
+    {
+        var player = new Player();
+
+        player.Score();
+        player.Score();
+
+        player.Points.Should().Be(30);
+    }
 }
