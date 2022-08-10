@@ -10,5 +10,5 @@ public class Player
             Points += 10;
     }
 
-    public int Points = 0;
+    public int Points;
 }

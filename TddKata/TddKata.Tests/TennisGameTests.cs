@@ -70,4 +70,12 @@ public class TennisGameTests
 
         game.GetWinner().Should().Be(game.Player2);
     }
+
+    [Test]
+    public void WhenGameIsNotFinished_GetWinnerReturnsNull()
+    {
+        var game = new TennisGame();
+
+        game.GetWinner().Should().Be(null);
+    }
 }
