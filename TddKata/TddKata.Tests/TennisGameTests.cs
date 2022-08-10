@@ -58,4 +58,16 @@ public class TennisGameTests
 
         game.GetWinner().Should().Be(game.Player1);
     }
+
+    [Test]
+    public void WhenPlayer2ScoresFourTimesFromBeginning_HeWins()
+    {
+        var game = new TennisGame();
+        game.Player2.Score();
+        game.Player2.Score();
+        game.Player2.Score();
+        game.Player2.Score();
+
+        game.GetWinner().Should().Be(game.Player2);
+    }
 }

@@ -7,6 +7,10 @@ public class TennisGame
 
     public Player GetWinner()
     {
-        return Player1;
+        var players = new[] {Player1, Player2};
+
+        var highestScore = players.Max(p => p.Points);
+        var playerWithHighestScore = players.First(p => p.Points == highestScore);
+        return playerWithHighestScore;
     }
 }
