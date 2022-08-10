@@ -9,11 +9,17 @@ public class TennisGame
     {
         var players = new[] {Player1, Player2};
 
-        if (players.All(x => x.Points < 40))
+        if (players.All(x => x.Points <= 40))
             return null;
 
-        var highestScore = players.Max(p => p.Points);
-        var playerWithHighestScore = players.First(p => p.Points == highestScore);
-        return playerWithHighestScore;
+        var winnerCandidate = players.OrderBy(p => p.Points).Last();
+        var secondPlace = players.Except(new[] {winnerCandidate}).First();
+
+        if (winnerCandidate.Points - secondPlace.Points > 30)
+        {
+            return winnerCandidate;
+        }
+
+        return null;
     }
 }

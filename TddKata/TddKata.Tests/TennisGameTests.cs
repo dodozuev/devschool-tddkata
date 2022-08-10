@@ -78,4 +78,20 @@ public class TennisGameTests
 
         game.GetWinner().Should().Be(null);
     }
+
+
+    [Test]
+    public void WhenDeuce_ShouldNotReturnWinner()
+    {
+        var game = new TennisGame();
+        game.Player2.Score();
+        game.Player2.Score();
+        game.Player2.Score();
+        game.Player2.Score();
+        game.Player1.Score();
+        game.Player1.Score();
+        game.Player1.Score();
+
+        game.GetWinner().Should().Be(null);
+    }
 }
