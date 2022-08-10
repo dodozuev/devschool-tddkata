@@ -46,4 +46,16 @@ public class TennisGameTests
 
         player.Points.Should().Be(40);
     }
+
+    [Test]
+    public void WhenPlayer1ScoresFourTimesFromBeginning_HeWins()
+    {
+        var game = new TennisGame();
+        game.Player1.Score();
+        game.Player1.Score();
+        game.Player1.Score();
+        game.Player1.Score();
+
+        game.GetWinner().Should().Be(game.Player1);
+    }
 }
