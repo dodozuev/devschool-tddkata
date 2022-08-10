@@ -56,7 +56,7 @@ public class TennisGameTests
         game.Player1.Score();
         game.Player1.Score();
 
-        game.GetWinner().Should().Be(game.Player1);
+        game.Winner.Should().Be(game.Player1);
     }
 
     [Test]
@@ -68,7 +68,7 @@ public class TennisGameTests
         game.Player2.Score();
         game.Player2.Score();
 
-        game.GetWinner().Should().Be(game.Player2);
+        game.Winner.Should().Be(game.Player2);
     }
 
     [Test]
@@ -76,7 +76,7 @@ public class TennisGameTests
     {
         var game = new TennisGame();
 
-        game.GetWinner().Should().Be(null);
+        game.Winner.Should().Be(null);
     }
 
 
@@ -92,7 +92,7 @@ public class TennisGameTests
         game.Player1.Score();
         game.Player1.Score();
 
-        game.GetWinner().Should().Be(null);
+        game.Winner.Should().Be(null);
     }
 
     [Test]
@@ -108,6 +108,21 @@ public class TennisGameTests
         game.Player1.Score();
         game.Player2.Score();
 
-        game.GetWinner().Should().Be(game.Player2);
+        game.Winner.Should().Be(game.Player2);
+    }
+
+    [Test]
+    public void WhenAPlayerWins_ResultIsSaved()
+    {
+        var game = new TennisGame();
+        game.Player2.Score();
+        game.Player2.Score();
+        game.Player2.Score();
+        game.Player2.Score();
+        game.Player1.Score();
+        game.Player1.Score();
+        game.Player1.Score();
+
+        game.Winner.Should().Be(game.Player2);
     }
 }

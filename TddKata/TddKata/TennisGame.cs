@@ -4,8 +4,14 @@ public class TennisGame
 {
     public Player Player1 = new Player();
     public Player Player2 = new Player();
+    public Player? Winner = null;
+    public void ScorePlayer(Player player)
+    {
+        player.Score();
+        Winner ??= GetWinner();
+    }
 
-    public Player? GetWinner()
+    private Player? GetWinner()
     {
         var players = new[] {Player1, Player2};
 
