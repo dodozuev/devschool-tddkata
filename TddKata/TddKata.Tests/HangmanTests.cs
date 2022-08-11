@@ -49,4 +49,14 @@ public class HangmanTests
 
         sut.IncorrectGuesses.Should().Be(1);
     }
+
+    [Test]
+    public void WhenTryGuessing_AndGuessIsRight_ShouldNotAddToGuesses()
+    {
+        var sut = new Hangman("testWord");
+
+        sut.Guess('t');
+
+        sut.IncorrectGuesses.Should().Be(0);
+    }
 }
