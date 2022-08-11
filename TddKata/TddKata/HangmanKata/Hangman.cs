@@ -15,6 +15,7 @@ public class Hangman
     public void Guess(char character)
     {
         var upperCharacter = Char.ToUpper(character);
+        ValidateCharacter(upperCharacter);
         if (!Word.Contains(upperCharacter))
             IncorrectGuesses++;
     }
@@ -23,5 +24,11 @@ public class Hangman
     {
         Undefined=0,
         InProgress=1,
+    }
+
+    private void ValidateCharacter(char character)
+    {
+        if (character < 'A' || character > 'Z')
+            throw new ArgumentException();
     }
 }

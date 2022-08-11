@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using NUnit.Framework;
 using TddKata.HangmanKata;
@@ -58,5 +59,13 @@ public class HangmanTests
         sut.Guess('t');
 
         sut.IncorrectGuesses.Should().Be(0);
+    }
+
+    [Test]
+    public void WhenTryGuessing_AndGuessIsNotWord_ShouldThrow()
+    {
+        var sut = new Hangman("testWord");
+
+        Assert.Throws<ArgumentException>(() => sut.Guess('2'));
     }
 }
