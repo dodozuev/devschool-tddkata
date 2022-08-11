@@ -31,4 +31,12 @@ public class HangmanTests
 
         sut.IncorrectGuesses.Should().Be(0);
     }
+
+    [Test]
+    public void WhenHangmanCreated_GameIsInProgress()
+    {
+        var sut = new Hangman("testWord");
+
+        sut.CurrentState.Should().Be(Hangman.State.InProgress);
+    }
 }
