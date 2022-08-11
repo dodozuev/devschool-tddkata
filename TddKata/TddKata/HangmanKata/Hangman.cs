@@ -9,11 +9,14 @@ public class Hangman
     public State CurrentState {
         get
         {
+            if (!Word.Except(Guesses.Keys.ToArray()).Any())
+                return State.Won;
             if (IncorrectGuesses >= _maxGuessCount)
                 return State.Lost;
             return State.InProgress;
         }
     }
+
     private readonly int _maxGuessCount;
 
     public Hangman(string word, int maxGuessCount)

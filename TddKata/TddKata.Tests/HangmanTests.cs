@@ -119,7 +119,7 @@ public class HangmanTests
     {
         var sut = new Hangman("testWord", 9);
 
-        var guess = 'z';
+        var guess = 't';
 
         sut.Guess(guess).Should().BeTrue();
     }
@@ -133,5 +133,17 @@ public class HangmanTests
         sut.Guess('x');
 
         sut.CurrentState.Should().Be(Hangman.State.Lost);
+    }
+
+    [Test]
+    public void WhenGuessedWholeWord_ShouldWin()
+    {
+        var sut = new Hangman("tes", 2);
+
+        sut.Guess('t');
+        sut.Guess('e');
+        sut.Guess('s');
+
+        sut.CurrentState.Should().Be(Hangman.State.Won);
     }
 }
