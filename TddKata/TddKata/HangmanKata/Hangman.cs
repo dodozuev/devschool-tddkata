@@ -6,11 +6,20 @@ public class Hangman
     public int IncorrectGuesses { get; private set; }
     public Dictionary<char, bool> Guesses { get; private set; }
 
-    public State CurrentState = State.InProgress;
+    public State CurrentState {
+        get
+        {
+            if (IncorrectGuesses >= _maxGuessCount)
+                return State.Lost;
+            return State.InProgress;
+        }
+    }
+    private readonly int _maxGuessCount;
 
-    public Hangman(string word)
+    public Hangman(string word, int maxGuessCount)
     {
         Word = word.ToUpper();
+        _maxGuessCount = maxGuessCount;
         Guesses = new Dictionary<char, bool>();
     }
 
@@ -40,6 +49,8 @@ public class Hangman
     {
         Undefined=0,
         InProgress=1,
+        Lost=2,
+        Won=3
     }
 
     private void ValidateCharacter(char character)

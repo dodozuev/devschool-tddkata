@@ -11,7 +11,7 @@ public class HangmanTests
     public void WhenHangmanCreated_ShouldAcceptWord()
     {
         var testWord = "TESTWORD";
-        var sut = new Hangman(testWord);
+        var sut = new Hangman(testWord, 9);
 
         sut.Word.Should().Be(testWord);
     }
@@ -20,7 +20,7 @@ public class HangmanTests
     public void WhenHangmanCreated_ShouldStoreWordInUpperCase()
     {
         var testWord = "Testword";
-        var sut = new Hangman(testWord);
+        var sut = new Hangman(testWord, 9);
 
         sut.Word.Should().Be(testWord.ToUpper());
     }
@@ -28,7 +28,7 @@ public class HangmanTests
     [Test]
     public void WhenHangmanCreated_IncorrectGuessesShouldBeZero()
     {
-        var sut = new Hangman("testWord");
+        var sut = new Hangman("testWord", 9);
 
         sut.IncorrectGuesses.Should().Be(0);
     }
@@ -36,7 +36,7 @@ public class HangmanTests
     [Test]
     public void WhenHangmanCreated_GameIsInProgress()
     {
-        var sut = new Hangman("testWord");
+        var sut = new Hangman("testWord", 9);
 
         sut.CurrentState.Should().Be(Hangman.State.InProgress);
     }
@@ -44,7 +44,7 @@ public class HangmanTests
     [Test]
     public void WhenTryGuessing_AndGuessIsWrong_ShouldAddToGuesses()
     {
-        var sut = new Hangman("testWord");
+        var sut = new Hangman("testWord", 9);
 
         sut.Guess('z');
 
@@ -54,7 +54,7 @@ public class HangmanTests
     [Test]
     public void WhenTryGuessing_AndGuessIsRight_ShouldNotAddToGuesses()
     {
-        var sut = new Hangman("testWord");
+        var sut = new Hangman("testWord", 9);
 
         sut.Guess('t');
 
@@ -64,7 +64,7 @@ public class HangmanTests
     [Test]
     public void WhenTryGuessing_AndGuessIsNotWord_ShouldThrow()
     {
-        var sut = new Hangman("testWord");
+        var sut = new Hangman("testWord", 9);
 
         Assert.Throws<ArgumentException>(() => sut.Guess('2'));
     }
@@ -72,7 +72,7 @@ public class HangmanTests
     [Test]
     public void WhenTryGuessing_AddWordToGuesses()
     {
-        var sut = new Hangman("testWord");
+        var sut = new Hangman("testWord", 9);
 
         var guess = 'z';
         sut.Guess(guess);
@@ -83,7 +83,7 @@ public class HangmanTests
     [Test]
     public void WhenTryGuessingTwiceSame_ShouldIncreaseIncorrectGuessesOnlyOnce()
     {
-        var sut = new Hangman("testWord");
+        var sut = new Hangman("testWord", 9);
 
         var guess = 'z';
         sut.Guess(guess);
@@ -95,7 +95,7 @@ public class HangmanTests
     [Test]
     public void WhenTryGuessingTwiceSame_ShouldAddOnlyOneGuessToGuesses()
     {
-        var sut = new Hangman("testWord");
+        var sut = new Hangman("testWord", 9);
 
         var guess = 't';
         sut.Guess(guess);
@@ -107,7 +107,7 @@ public class HangmanTests
     [Test]
     public void WhenGuessedWrong_ShouldReturnFalse()
     {
-        var sut = new Hangman("testWord");
+        var sut = new Hangman("testWord", 9);
 
         var guess = 'z';
 
@@ -117,10 +117,21 @@ public class HangmanTests
     [Test]
     public void WhenGuessedRight_ShouldReturnTrue()
     {
-        var sut = new Hangman("testWord");
+        var sut = new Hangman("testWord", 9);
 
         var guess = 'z';
 
         sut.Guess(guess).Should().BeTrue();
+    }
+
+    [Test]
+    public void WhenMadeTooManyMistakes_ShouldLooseTheGame()
+    {
+        var sut = new Hangman("testWord", 2);
+
+        sut.Guess('z');
+        sut.Guess('x');
+
+        sut.CurrentState.Should().Be(Hangman.State.Lost);
     }
 }
