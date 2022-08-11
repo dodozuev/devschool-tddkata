@@ -68,4 +68,27 @@ public class HangmanTests
 
         Assert.Throws<ArgumentException>(() => sut.Guess('2'));
     }
+
+    [Test]
+    public void WhenTryGuessing_AddWordToGuesses()
+    {
+        var sut = new Hangman("testWord");
+
+        var guess = 'z';
+        sut.Guess(guess);
+
+        sut.Guesses.Keys.Should().Contain(Char.ToUpper(guess));
+    }
+
+    [Test]
+    public void WhenTryGuessingTwiceSame_ShouldIncreaseIncorrectGuessesOnlyOnce()
+    {
+        var sut = new Hangman("testWord");
+
+        var guess = 'z';
+        sut.Guess(guess);
+        sut.Guess(guess);
+
+        sut.IncorrectGuesses.Should().Be(1);
+    }
 }
