@@ -113,4 +113,14 @@ public class HangmanTests
 
         sut.Guess(guess).Should().BeFalse();
     }
+
+    [Test]
+    public void WhenGuessedRight_ShouldReturnTrue()
+    {
+        var sut = new Hangman("testWord");
+
+        var guess = 'z';
+
+        sut.Guess(guess).Should().BeTrue();
+    }
 }
