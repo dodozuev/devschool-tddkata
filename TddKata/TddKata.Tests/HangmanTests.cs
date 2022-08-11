@@ -91,4 +91,16 @@ public class HangmanTests
 
         sut.IncorrectGuesses.Should().Be(1);
     }
+
+    [Test]
+    public void WhenTryGuessingTwiceSame_ShouldAddOnlyOneGuessToGuesses()
+    {
+        var sut = new Hangman("testWord");
+
+        var guess = 't';
+        sut.Guess(guess);
+        sut.Guess(guess);
+
+        sut.Guesses.Keys.Count.Should().Be(1);
+    }
 }
