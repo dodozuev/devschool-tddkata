@@ -39,4 +39,14 @@ public class HangmanTests
 
         sut.CurrentState.Should().Be(Hangman.State.InProgress);
     }
+
+    [Test]
+    public void WhenTryGuessing_AndGuessIsWrong_ShouldAddToGuesses()
+    {
+        var sut = new Hangman("testWord");
+
+        sut.Guess('z');
+
+        sut.IncorrectGuesses.Should().Be(1);
+    }
 }
