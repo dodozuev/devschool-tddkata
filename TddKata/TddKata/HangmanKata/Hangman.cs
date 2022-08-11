@@ -28,13 +28,16 @@ public class Hangman
 
     public bool Guess(char character)
     {
+        if (GameIsFinished())
+            throw new Exception("should not guess after game is finished");
+
+
         var upperCharacter = Char.ToUpper(character);
+        ValidateCharacter(upperCharacter);
 
         if (Guesses.ContainsKey(upperCharacter))
             return Guesses[upperCharacter];
 
-
-        ValidateCharacter(upperCharacter);
         if (!Word.Contains(upperCharacter))
         {
             Guesses.Add(upperCharacter, false);
@@ -46,6 +49,11 @@ public class Hangman
         }
 
         return Guesses[upperCharacter];
+    }
+
+    private bool GameIsFinished()
+    {
+        return CurrentState == State.Lost || CurrentState == State.Won;
     }
 
     public enum State

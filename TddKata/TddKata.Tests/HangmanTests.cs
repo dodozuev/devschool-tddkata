@@ -146,4 +146,15 @@ public class HangmanTests
 
         sut.CurrentState.Should().Be(Hangman.State.Won);
     }
+
+    [Test]
+    public void WhenAlreadyWonOrLost_CannotGuess()
+    {
+        var sut = new Hangman("tes", 2);
+
+        sut.Guess('t');
+        sut.Guess('e');
+        sut.Guess('s');
+        Assert.Throws<Exception>(() => sut.Guess('f'));
+    }
 }
