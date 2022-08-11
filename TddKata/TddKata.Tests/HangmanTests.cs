@@ -23,4 +23,12 @@ public class HangmanTests
 
         sut.Word.Should().Be(testWord.ToUpper());
     }
+
+    [Test]
+    public void WhenHangmanCreated_IncorrectGuessesShouldBeZero()
+    {
+        var sut = new Hangman("testWord");
+
+        sut.IncorrectGuesses.Should().Be(0);
+    }
 }
