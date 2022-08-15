@@ -88,4 +88,16 @@ public class PhotoCollectionTests
 
         Assert.Throws<InvalidOperationException>(() => album.Cover = nonExistentPhoto);
     }
+
+    [Test]
+    public void WhenCoverOfPhotoIsRemoved_ShouldUpdateCover()
+    {
+        var firstPhoto = new Uri("http://www.photo.com");
+        var secondPhoto = new Uri("http://www.secondphoto.com");
+        var album = new PhotoAlbum(new[] {firstPhoto, secondPhoto});
+
+        album.RemovePhoto(firstPhoto);
+
+        album.Cover.Should().Be(secondPhoto);
+    }
 }

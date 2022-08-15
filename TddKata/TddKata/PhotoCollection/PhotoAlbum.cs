@@ -40,6 +40,9 @@ public class PhotoAlbum
             throw new InvalidOperationException();
 
         _photos.Remove(photoToRemove);
+
+        if (_cover == photoToRemove)
+            _cover = _photos.First();
     }
 
     public void AddPhoto(Uri secondPhoto)
