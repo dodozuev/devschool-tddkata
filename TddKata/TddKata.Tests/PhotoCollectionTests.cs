@@ -14,6 +14,14 @@ public class PhotoCollectionTests
     }
 
     [Test]
+    public void WhenCreateAlbum_ShouldSetFirstPhotoAsCover()
+    {
+        var firstPhoto = new Uri("http://www.photo.com");
+        var album = new PhotoAlbum(new[] {firstPhoto});
+        album.Cover.Should().Be(firstPhoto);
+    }
+
+    [Test]
     public void WhenSetCover_ShouldSetCoverPhoto()
     {
         var coverPhoto = new Uri("http://coverphoto.com");
@@ -22,5 +30,7 @@ public class PhotoCollectionTests
 
         album.Cover.Should().Be(coverPhoto);
     }
+
+
 }
 

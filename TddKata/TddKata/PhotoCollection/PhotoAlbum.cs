@@ -13,5 +13,6 @@ public class PhotoAlbum
         if (!photos.Any())
             throw new ArgumentException("Album must have at least 1 uri");
         _photos = photos.ToList();
+        Cover = photos.First();
     }
 }
