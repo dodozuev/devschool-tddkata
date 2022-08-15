@@ -31,6 +31,14 @@ public class PhotoCollectionTests
         album.Cover.Should().Be(coverPhoto);
     }
 
+    [Test]
+    public void WhenRemovePhoto_ShouldRemoveItFromPhotos()
+    {
+        var firstPhoto = new Uri("http://www.photo.com");
+        var secondPhoto = new Uri("http://secondphoto.com");
+        var album = new PhotoAlbum(new[] {firstPhoto, secondPhoto});
+        album.RemovePhoto(secondPhoto);
 
+        album.Photos.Should().ContainSingle().Which.Should().Be(firstPhoto);
+    }
 }
-

@@ -15,4 +15,9 @@ public class PhotoAlbum
         _photos = photos.ToList();
         Cover = photos.First();
     }
+
+    public void RemovePhoto(Uri secondPhoto)
+    {
+        _photos.Remove(secondPhoto);
+    }
 }
