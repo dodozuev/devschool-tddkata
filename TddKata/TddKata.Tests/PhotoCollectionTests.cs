@@ -57,4 +57,13 @@ public class PhotoCollectionTests
 
         album.Photos.Should().BeEquivalentTo(new[] {firstPhoto, secondPhoto});
     }
+
+    [Test]
+    public void WhenRemoveLastPhoto_ShouldThrow()
+    {
+        var firstPhoto = new Uri("http://www.photo.com");
+        var album = new PhotoAlbum(new[] {firstPhoto});
+
+        Assert.Throws<InvalidOperationException>(() => album.RemovePhoto(firstPhoto));
+    }
 }

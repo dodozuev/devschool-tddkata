@@ -18,6 +18,9 @@ public class PhotoAlbum
 
     public void RemovePhoto(Uri secondPhoto)
     {
+        if (_photos.Count == 1)
+            throw new InvalidOperationException();
+
         _photos.Remove(secondPhoto);
     }
 
