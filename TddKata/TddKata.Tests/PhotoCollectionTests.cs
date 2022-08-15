@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using NUnit.Framework;
 using TddKata.PhotoCollection;
 
@@ -10,6 +11,16 @@ public class PhotoCollectionTests
     public void WhenCreateAlbum_ShouldHaveAtLeastOnePhoto()
     {
         Assert.Throws<ArgumentException>(() => new PhotoAlbum(Array.Empty<Uri>()));
+    }
+
+    [Test]
+    public void WhenSetCover_ShouldSetCoverPhoto()
+    {
+        var coverPhoto = new Uri("http://coverphoto.com");
+        var album = new PhotoAlbum(new[] {new Uri("http://www.photo.com")});
+        album.Cover = coverPhoto;
+
+        album.Cover.Should().Be(coverPhoto);
     }
 }
 
