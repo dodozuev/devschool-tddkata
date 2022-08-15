@@ -3,7 +3,22 @@ namespace TddKata.PhotoCollection;
 public class PhotoAlbum
 {
     public IReadOnlyCollection<Uri> Photos => _photos;
-    public Uri Cover { get; set; }
+
+    public Uri Cover
+    {
+        get => _cover;
+        set
+        {
+            if (!_photos.Contains(value))
+            {
+                throw new InvalidOperationException("Cover should exist inside the photo album. Add it first");
+            }
+
+            _cover = value;
+        }
+    }
+
+    private Uri _cover;
 
     private List<Uri> _photos;
 
@@ -13,7 +28,7 @@ public class PhotoAlbum
         if (!photos.Any())
             throw new ArgumentException("Album must have at least 1 uri");
         _photos = photos.ToList();
-        Cover = photos.First();
+        Cover = _photos.First();
     }
 
     public void RemovePhoto(Uri photoToRemove)

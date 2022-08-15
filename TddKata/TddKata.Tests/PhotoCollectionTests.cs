@@ -26,8 +26,9 @@ public class PhotoCollectionTests
     [Test]
     public void WhenSetCover_ShouldSetCoverPhoto()
     {
+        var firstPhoto = new Uri("http://www.photo.com");
         var coverPhoto = new Uri("http://coverphoto.com");
-        var album = new PhotoAlbum(new[] {new Uri("http://www.photo.com")});
+        var album = new PhotoAlbum(new[] {firstPhoto, coverPhoto});
 
         album.Cover = coverPhoto;
 
@@ -76,5 +77,15 @@ public class PhotoCollectionTests
         var album = new PhotoAlbum(new[] {firstPhoto, secondPhoto});
 
         Assert.Throws<InvalidOperationException>(() => album.RemovePhoto(nonExistentPhoto));
+    }
+
+    [Test]
+    public void WhenSetCoverOfNonExistentPhoto_ShouldThrow()
+    {
+        var firstPhoto = new Uri("http://www.photo.com");
+        var nonExistentPhoto = new Uri("http://www.nonexistentphoto.com");
+        var album = new PhotoAlbum(new[] {firstPhoto});
+
+        Assert.Throws<InvalidOperationException>(() => album.Cover = nonExistentPhoto);
     }
 }
