@@ -16,12 +16,15 @@ public class PhotoAlbum
         Cover = photos.First();
     }
 
-    public void RemovePhoto(Uri secondPhoto)
+    public void RemovePhoto(Uri photoToRemove)
     {
+        if (!_photos.Contains(photoToRemove))
+            throw new InvalidOperationException("No such photo found");
+
         if (_photos.Count == 1)
             throw new InvalidOperationException();
 
-        _photos.Remove(secondPhoto);
+        _photos.Remove(photoToRemove);
     }
 
     public void AddPhoto(Uri secondPhoto)

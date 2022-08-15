@@ -66,4 +66,15 @@ public class PhotoCollectionTests
 
         Assert.Throws<InvalidOperationException>(() => album.RemovePhoto(firstPhoto));
     }
+
+    [Test]
+    public void WhenRemoveNonExistentPhoto_ShouldThrow()
+    {
+        var firstPhoto = new Uri("http://www.photo.com");
+        var secondPhoto = new Uri("http://www.secondphoto.com");
+        var nonExistentPhoto = new Uri("http://www.nonexistentphoto.com");
+        var album = new PhotoAlbum(new[] {firstPhoto, secondPhoto});
+
+        Assert.Throws<InvalidOperationException>(() => album.RemovePhoto(nonExistentPhoto));
+    }
 }
