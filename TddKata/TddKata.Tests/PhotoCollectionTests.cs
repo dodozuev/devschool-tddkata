@@ -17,7 +17,9 @@ public class PhotoCollectionTests
     public void WhenCreateAlbum_ShouldSetFirstPhotoAsCover()
     {
         var firstPhoto = new Uri("http://www.photo.com");
+
         var album = new PhotoAlbum(new[] {firstPhoto});
+
         album.Cover.Should().Be(firstPhoto);
     }
 
@@ -26,6 +28,7 @@ public class PhotoCollectionTests
     {
         var coverPhoto = new Uri("http://coverphoto.com");
         var album = new PhotoAlbum(new[] {new Uri("http://www.photo.com")});
+
         album.Cover = coverPhoto;
 
         album.Cover.Should().Be(coverPhoto);
@@ -37,8 +40,21 @@ public class PhotoCollectionTests
         var firstPhoto = new Uri("http://www.photo.com");
         var secondPhoto = new Uri("http://secondphoto.com");
         var album = new PhotoAlbum(new[] {firstPhoto, secondPhoto});
+
         album.RemovePhoto(secondPhoto);
 
         album.Photos.Should().ContainSingle().Which.Should().Be(firstPhoto);
+    }
+
+    [Test]
+    public void WhenAddPhoto_ShouldAddItToPhotos()
+    {
+        var firstPhoto = new Uri("http://www.photo.com");
+        var secondPhoto = new Uri("http://secondphoto.com");
+        var album = new PhotoAlbum(new[] {firstPhoto});
+
+        album.AddPhoto(secondPhoto);
+
+        album.Photos.Should().BeEquivalentTo(new[] {firstPhoto, secondPhoto});
     }
 }

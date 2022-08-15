@@ -20,4 +20,9 @@ public class PhotoAlbum
     {
         _photos.Remove(secondPhoto);
     }
+
+    public void AddPhoto(Uri secondPhoto)
+    {
+        _photos.Add(secondPhoto);
+    }
 }
